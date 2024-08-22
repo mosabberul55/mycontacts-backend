@@ -29,4 +29,6 @@ const updateContact = (req, res) => {
 const deleteContact = (req, res) => {
     res.status(200).json({ message: `DELETE request to the homepage with id ${req.params.id}` });
 }
+
+
 module.exports = {getContacts, createContact, getContact, updateContact, deleteContact};
