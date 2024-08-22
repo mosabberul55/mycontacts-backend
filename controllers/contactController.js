@@ -9,6 +9,12 @@ const getContacts = (req, res) => {
 //@route POST /api/contacts
 //@access Public
 const createContact = (req, res) => {
+    console.log(req.body);
+    const {name, email, phone} = req.body;
+    if (!name || !email || !phone) {
+        res.status(400);
+        throw new Error("Please fill all the fields");
+    }
     res.status(201).json({ message: "POST request to the homepage" });
 }
 //@desc Get a contact
