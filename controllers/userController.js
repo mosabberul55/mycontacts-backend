@@ -64,13 +64,17 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route GET /api/profile
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-    res.send("Profile route");
+    res.json(req.user);
 });
 //@desc Update user profile
 //@route PUT /api/profile
 //@access Private
 const updateUserProfile = asyncHandler(async (req, res) => {
-    res.send("Update profile route");
+    const {name, email, password} = req.body;
+    if (!name || !email || !password) {
+        res.status(400);
+        throw new Error("Please fill all the fields");
+    }
 });
 
 module.exports = {registerUser, loginUser, getUserProfile, updateUserProfile};
