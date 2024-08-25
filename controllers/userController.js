@@ -64,7 +64,8 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route GET /api/profile
 //@access Private
 const getUserProfile = asyncHandler(async (req, res) => {
-    res.json(req.user);
+    const user = await User.findById(req.user.id).select("-password").populate("contacts");
+    res.status(200).json(user);
 });
 //@desc Update user profile
 //@route PUT /api/profile
