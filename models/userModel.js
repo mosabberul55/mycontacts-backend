@@ -13,13 +13,18 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Please provide a password']
-  },
-  contacts: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Contact'
-  }]
+  }
 }, {
   timestamps: true
 });
+
+userSchema.virtual('contacts', {
+  ref: 'Contact',
+  localField: '_id',
+  foreignField: 'user_id'
+});
+
+userSchema.set('toObject', { virtuals: true });
+userSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', userSchema);
